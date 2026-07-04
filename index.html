@@ -1,0 +1,2962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxurysecuritydoors: Digital Storefront &amp; Quote Engine | Justdavidtech</title>
+  <meta name="description"
+    content="Threshold is a high-fidelity digital storefront built for Luxury Security Doors, Abuja, engineered with a structured product catalog, an instant quote calculator, an admin command center, and a full brand identity suite when you need them." />
+  <meta property="og:title" content="Threshold: Digital Storefront &amp; Quote Engine | Justdavidtech" />
+  <meta property="og:description"
+    content="A premium digital storefront for Luxury Security Doors, built to include a structured catalog, an instant quote engine, an admin command center, and a full brand identity suite when you need them." />
+  <link href="/logo.jpg" rel="icon" type="image" />
+  <meta property="og:image" content="https://luxurysecuritydoors-test.vercel.app/logo.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luxurysecuritydoors-test.vercel.app/" />
+  <link rel="canonical" href="https://luxurysecuritydoors-test.vercel.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Luxurysecuritydoors: Digital Storefront &amp; Quote Engine | Justdavidtech" />
+  <meta name="twitter:description"
+    content="A premium digital storefront for Luxury Security Doors, built to include a structured catalog, an instant quote engine, an admin command center, and a full brand identity suite when you need them." />
+  <meta name="twitter:image" content="https://luxurysecuritydoors-test.vercel.app/logo.jpg" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --char: #14110E;
+      --char-mid: #1B1713;
+      --char-light: #241F19;
+      --bronze: #f73606;
+      --bronze-light: #ff7e5f;
+      --bronze-dim: #7A5C34;
+      --cream: #F3ECDD;
+      --white: #FFFFFF;
+      --gray: #A79C8C;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--char);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--char);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--bronze);
+      border-radius: 2px;
+    }
+
+    /* ── Loader ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--char);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .loader-door {
+      width: 64px;
+      height: 92px;
+      border: 2px solid var(--bronze);
+      border-radius: 2px 2px 0 0;
+      position: relative;
+      opacity: 0;
+    }
+
+    .loader-door::before {
+      content: '';
+      position: absolute;
+      right: 8px;
+      top: 46px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--bronze);
+    }
+
+    .loader-logo {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(24px, 5vw, 38px);
+      font-weight: 700;
+      color: var(--bronze-light);
+      letter-spacing: 3px;
+      opacity: 0;
+    }
+
+    .loader-bar-wrap {
+      width: 200px;
+      height: 1px;
+      background: rgba(184, 135, 75, 0.2);
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--bronze), var(--bronze-light));
+      transition: width 1.2s ease;
+    }
+
+    .loader-text {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--bronze-dim);
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(20, 17, 14, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 14px 5%;
+      border-bottom: 1px solid rgba(184, 135, 75, 0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--bronze-light);
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--bronze-light);
+    }
+
+    .nav-cta {
+      background: var(--bronze);
+      color: var(--char) !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      letter-spacing: 1px !important;
+      transition: background 0.3s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--bronze-light) !important;
+      color: var(--char) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 101;
+      position: relative;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--bronze);
+      transition: all 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--char);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: 'Fraunces', serif;
+      font-size: 26px;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--bronze-light);
+    }
+
+    /* ── FABs ── */
+    .fab-stack {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .fab {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .fab-whatsapp {
+      background: #25D366;
+      color: var(--white);
+      font-size: 26px;
+      position: relative;
+    }
+
+    .fab-whatsapp::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #25D366;
+      opacity: 0.5;
+      animation: fabPulse 2.4s infinite;
+    }
+
+    @keyframes fabPulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: scale(1.7);
+        opacity: 0;
+      }
+    }
+
+    .fab-whatsapp:hover {
+      transform: scale(1.08);
+    }
+
+    .fab-top {
+      background: rgba(184, 135, 75, 0.12);
+      border: 1px solid rgba(184, 135, 75, 0.4);
+      color: var(--bronze-light);
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+    }
+
+    .fab-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .fab-top:hover {
+      background: var(--bronze);
+      color: var(--char);
+    }
+
+    /* ── Shared ── */
+    .bronze-line {
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--bronze);
+      margin: 0 auto 20px;
+    }
+
+    .bronze-line.left {
+      margin: 0 0 20px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+      font-weight: 500;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* door-panel groove divider used throughout as the signature motif */
+    .panel-rule {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin: 0 auto 24px;
+    }
+
+    .panel-rule span {
+      width: 1px;
+      height: 26px;
+      background: rgba(184, 135, 75, 0.35);
+    }
+
+    .panel-rule span:nth-child(2) {
+      height: 40px;
+      background: var(--bronze);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184, 135, 75, 0.08) 0%, transparent 70%);
+    }
+
+    .hero-grooves {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(90deg, rgba(184, 135, 75, 0.035) 0px, rgba(184, 135, 75, 0.035) 1px, transparent 1px, transparent 64px);
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(184, 135, 75, 0.3);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+      margin-bottom: 32px;
+      background: rgba(184, 135, 75, 0.05);
+    }
+
+    .hero-badge::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--bronze-light);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+    }
+
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(40px, 7.5vw, 88px);
+      font-weight: 700;
+      line-height: 1.04;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero-title .bronze {
+      color: var(--bronze-light);
+    }
+
+    .hero-title .outline {
+      -webkit-text-stroke: 1px rgba(184, 135, 75, 0.5);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* Signature hero element: a door that swings open on load, revealing the threshold light */
+    .hero-door-stage {
+      position: relative;
+      width: 180px;
+      height: 240px;
+      margin: 0 auto 44px;
+      perspective: 900px;
+    }
+
+    .hero-door-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(224, 181, 121, 0.35) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 1.4s ease 1.6s;
+    }
+
+    .hero-door-glow.lit {
+      opacity: 1;
+    }
+
+    .hero-door-frame {
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(184, 135, 75, 0.4);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .hero-door-leaf {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--char-light), var(--char-mid));
+      border: 2px solid var(--bronze);
+      border-radius: 3px 3px 0 0;
+      transform-origin: left center;
+      transform: rotateY(0deg);
+      transition: transform 1.6s cubic-bezier(.22, .61, .36, 1) 0.6s;
+      box-shadow: 6px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-door-leaf.open {
+      transform: rotateY(-108deg);
+    }
+
+    .hero-door-leaf::before {
+      content: '';
+      position: absolute;
+      top: 14%;
+      left: 12%;
+      right: 12%;
+      bottom: 14%;
+      border: 1px solid rgba(184, 135, 75, 0.3);
+    }
+
+    .hero-door-handle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bronze-light);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--bronze);
+      color: var(--char);
+      padding: 16px 36px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+
+    .btn-primary:hover::after {
+      transform: translateX(100%);
+    }
+
+    .btn-primary:hover {
+      background: var(--bronze-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(184, 135, 75, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 16px 36px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--bronze-light);
+      color: var(--bronze-light);
+    }
+
+    /* ── STATS ── */
+    #stats {
+      padding: 60px 5%;
+      border-top: 1px solid rgba(184, 135, 75, 0.1);
+      border-bottom: 1px solid rgba(184, 135, 75, 0.1);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      padding: 32px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(184, 135, 75, 0.1);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--bronze-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+    }
+
+    /* ── PROBLEM ── */
+    #problem {
+      padding: 120px 5%;
+      background: var(--char-mid);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      background: rgba(184, 135, 75, 0.04);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4.6vw, 48px);
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.55);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .problem-card {
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(184, 135, 75, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+
+    .problem-card:hover {
+      background: rgba(184, 135, 75, 0.04);
+      border-color: rgba(184, 135, 75, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--bronze);
+      transition: height 0.4s;
+    }
+
+    .problem-card:hover::before {
+      height: 100%;
+    }
+
+    .problem-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--bronze-dim);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .problem-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .problem-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+    }
+
+    .quote-banner {
+      max-width: 800px;
+      margin: 70px auto 0;
+      text-align: center;
+      position: relative;
+      padding: 40px;
+      border: 1px solid rgba(184, 135, 75, 0.2);
+    }
+
+    .quote-banner::before,
+    .quote-banner::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: var(--bronze);
+      border-style: solid;
+    }
+
+    .quote-banner::before {
+      top: -1px;
+      left: -1px;
+      border-width: 2px 0 0 2px;
+    }
+
+    .quote-banner::after {
+      bottom: -1px;
+      right: -1px;
+      border-width: 0 2px 2px 0;
+    }
+
+    .quote-text {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(16px, 2.4vw, 22px);
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.6;
+    }
+
+    /* ── PLATFORM ── */
+    #platform {
+      padding: 120px 5%;
+      position: relative;
+    }
+
+    .platform-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .subsystems-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+    }
+
+    .subsystem-card {
+      padding: 48px 40px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(184, 135, 75, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+      cursor: default;
+    }
+
+    .subsystem-card:hover {
+      background: linear-gradient(135deg, rgba(184, 135, 75, 0.06), rgba(184, 135, 75, 0.02));
+      border-color: rgba(184, 135, 75, 0.25);
+    }
+
+    .subsystem-letter {
+      font-family: 'Fraunces', serif;
+      font-size: 72px;
+      font-weight: 900;
+      color: rgba(184, 135, 75, 0.08);
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    .subsystem-card:hover .subsystem-letter {
+      color: rgba(184, 135, 75, 0.15);
+    }
+
+    .subsystem-tag {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .subsystem-title {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .subsystem-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+    }
+
+    /* ── QUOTE ENGINE DETAIL ── */
+    #quote-engine {
+      padding: 120px 5%;
+      background: var(--char-mid);
+    }
+
+    .qe-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .qe-visual {
+      position: relative;
+      border: 1px solid rgba(184, 135, 75, 0.15);
+      border-radius: 4px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(20, 17, 14, 0.9), rgba(27, 23, 19, 0.9));
+    }
+
+    .qe-screen {
+      padding: 32px;
+    }
+
+    .qe-header-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot.red {
+      background: #FF5F57;
+    }
+
+    .dot.yellow {
+      background: #FFBD2E;
+    }
+
+    .dot.green {
+      background: #28CA41;
+    }
+
+    .qe-url {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .qe-body {
+      padding: 4px 0 20px;
+    }
+
+    .qe-title {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      color: var(--bronze-light);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .qe-field {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(184, 135, 75, 0.15);
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 10px;
+      font-family: 'DM Mono', monospace;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .qe-field span:last-child {
+      color: var(--white);
+    }
+
+    .qe-result {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid var(--bronze);
+      background: rgba(184, 135, 75, 0.06);
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .qe-result-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--bronze-dim);
+      margin-bottom: 6px;
+    }
+
+    .qe-result-price {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      color: var(--bronze-light);
+    }
+
+    .qe-btn {
+      width: 100%;
+      background: #25D366;
+      color: var(--white);
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+
+    .qe-log {
+      border-top: 1px solid rgba(184, 135, 75, 0.1);
+      padding: 16px 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: rgba(184, 135, 75, 0.55);
+    }
+
+    .qe-log div {
+      margin-bottom: 4px;
+    }
+
+    .qe-log .ok {
+      color: #28CA41;
+    }
+
+    .qe-log .warn {
+      color: var(--bronze-light);
+    }
+
+    .qe-features-list {
+      list-style: none;
+    }
+
+    .qe-features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.6;
+    }
+
+    .qe-features-list li::before {
+      content: '✓';
+      color: var(--bronze-light);
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(184, 135, 75, 0.15);
+      border: 1px solid var(--bronze);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── PACKAGES ── */
+    #packages {
+      padding: 120px 5%;
+    }
+
+    .packages-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .pkg-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 60px;
+      border: 1px solid rgba(184, 135, 75, 0.2);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      border-radius: 2px;
+      flex-wrap: wrap;
+    }
+
+    .pkg-tab {
+      padding: 12px 22px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+      border-right: 1px solid rgba(184, 135, 75, 0.15);
+      white-space: nowrap;
+    }
+
+    .pkg-tab:last-child {
+      border-right: none;
+    }
+
+    .pkg-tab.active {
+      background: var(--bronze);
+      color: var(--char);
+      font-weight: 700;
+    }
+
+    .pkg-tab:hover:not(.active) {
+      color: var(--bronze-light);
+      background: rgba(184, 135, 75, 0.05);
+    }
+
+    .pkg-panel {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pkg-panel.active {
+      display: block;
+    }
+
+    .pkg-card {
+      border: 1px solid rgba(184, 135, 75, 0.2);
+      background: linear-gradient(135deg, rgba(27, 23, 19, 0.8), rgba(20, 17, 14, 0.8));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pkg-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--bronze), var(--bronze-light));
+    }
+
+    .pkg-top {
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+      border-bottom: 1px solid rgba(184, 135, 75, 0.1);
+    }
+
+    .pkg-emoji {
+      font-size: 34px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .pkg-name {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .pkg-tagline {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.5;
+    }
+
+    .pkg-price-block {
+      text-align: right;
+    }
+
+    .pkg-price {
+      font-family: 'Fraunces', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--bronze-light);
+      line-height: 1;
+      display: block;
+    }
+
+    .pkg-price-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 4px;
+      display: block;
+    }
+
+    .pkg-maint {
+      margin-top: 12px;
+      padding: 8px 14px;
+      border: 1px solid rgba(184, 135, 75, 0.2);
+      display: inline-block;
+      font-size: 12px;
+      color: var(--bronze-light);
+    }
+
+    .pkg-maint span {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .pkg-features {
+      padding: 40px 48px;
+    }
+
+    .pkg-features-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--bronze-dim);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .features-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 32px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+    }
+
+    .feature-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(184, 135, 75, 0.1);
+      border: 1px solid rgba(184, 135, 75, 0.3);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: var(--bronze-light);
+      font-weight: 700;
+    }
+
+    /* ── CONVERSION ── */
+    #conversion {
+      padding: 120px 5%;
+      background: var(--char-mid);
+    }
+
+    .conversion-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .conversion-card {
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(184, 135, 75, 0.08);
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .conversion-card:hover {
+      border-color: rgba(184, 135, 75, 0.2);
+      background: rgba(184, 135, 75, 0.03);
+    }
+
+    .conversion-icon {
+      font-size: 26px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .conversion-title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .conversion-text {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+    }
+
+    .conversion-items {
+      margin-top: 12px;
+      list-style: none;
+    }
+
+    .conversion-items li {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.4);
+      padding: 4px 0;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .conversion-items li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--bronze-dim);
+      font-size: 10px;
+    }
+
+    /* ── STAGES ── */
+    #stages {
+      padding: 120px 5%;
+    }
+
+    .stages-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stage-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 32px;
+      padding: 40px 0;
+      border-bottom: 1px solid rgba(184, 135, 75, 0.08);
+      position: relative;
+    }
+
+    .stage-item:last-child {
+      border-bottom: none;
+    }
+
+    .stage-num-wrap {
+      text-align: center;
+      padding-top: 4px;
+    }
+
+    .stage-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--bronze-light);
+      letter-spacing: 2px;
+      display: block;
+    }
+
+    .stage-dot {
+      width: 1px;
+      height: calc(100% - 48px);
+      background: linear-gradient(to bottom, rgba(184, 135, 75, 0.3), transparent);
+      margin: 12px auto 0;
+    }
+
+    .stage-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .stage-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+    }
+
+    /* ── VALUE ── */
+    #value {
+      padding: 120px 5%;
+      background: var(--char-mid);
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1100px;
+      margin: 60px auto 0;
+    }
+
+    .value-card {
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(184, 135, 75, 0.08);
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bronze);
+      transition: width 0.4s;
+    }
+
+    .value-card:hover::after {
+      width: 100%;
+    }
+
+    .value-card:hover {
+      background: rgba(184, 135, 75, 0.03);
+    }
+
+    .value-title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .value-text {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+    }
+
+    /* ── ABOUT DEVELOPER ── */
+    #about {
+      padding: 120px 5%;
+    }
+
+    .about-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--char-light), var(--char));
+      border: 1px solid rgba(184, 135, 75, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-avatar img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .about-avatar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(90deg, rgba(184, 135, 75, 0.05) 0px, rgba(184, 135, 75, 0.05) 1px, transparent 1px, transparent 24px);
+    }
+
+    .about-avatar-initial {
+      font-family: 'Fraunces', serif;
+      font-size: 96px;
+      font-weight: 900;
+      color: var(--bronze-light);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-role {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .about-name {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 3.6vw, 38px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .about-text {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .about-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .about-skill {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid rgba(184, 135, 75, 0.25);
+      color: var(--cream);
+      padding: 8px 16px;
+      border-radius: 30px;
+      background: rgba(184, 135, 75, 0.04);
+    }
+
+    /* ── PITCH DECK ── */
+    #pitch-deck {
+      padding: 120px 5%;
+      background: var(--char);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deck-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .deck-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .deck-card-glow {
+      position: absolute;
+      width: 320px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(184, 135, 75, 0.2) 0%, transparent 70%);
+      filter: blur(40px);
+      z-index: 0;
+    }
+
+    .deck-preview {
+      position: relative;
+      z-index: 1;
+      width: 280px;
+      height: 380px;
+      background: linear-gradient(135deg, var(--char-mid), var(--char-light));
+      border: 1px solid rgba(184, 135, 75, 0.3);
+      border-radius: 4px;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.4s ease, border-color 0.4s ease;
+    }
+
+    .deck-preview::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 30px 30px 0;
+      border-color: transparent transparent rgba(184, 135, 75, 0.3) transparent;
+      border-radius: 0 0 0 4px;
+    }
+
+    .deck-preview:hover {
+      transform: translateY(-8px) rotate(1deg);
+      border-color: var(--bronze);
+    }
+
+    .deck-preview-brand {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+    }
+
+    .deck-preview-title {
+      font-family: 'Fraunces', serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: 20px;
+      color: var(--white);
+    }
+
+    .deck-preview-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .deck-preview-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 14px;
+      color: var(--bronze-dim);
+      font-weight: 700;
+    }
+
+    .deck-btn-icon {
+      margin-right: 8px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 120px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      background: rgba(184, 135, 75, 0.06);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 4.6vw, 48px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .contact-sub {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .contact-card {
+      border: 1px solid rgba(184, 135, 75, 0.2);
+      padding: 48px;
+      margin-bottom: 40px;
+      background: rgba(184, 135, 75, 0.03);
+      position: relative;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+    }
+
+    .contact-rows {
+      list-style: none;
+      text-align: left;
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+    }
+
+    .contact-row:last-child {
+      border-bottom: none;
+    }
+
+    .contact-label {
+      width: 90px;
+      flex-shrink: 0;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+
+    .contact-value {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .contact-value a {
+      color: var(--bronze-light);
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 28px 5%;
+      border-top: 1px solid rgba(184, 135, 75, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--bronze-light);
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.25);
+      letter-spacing: 1px;
+    }
+
+    .footer-tag {
+      font-size: 11px;
+      color: var(--bronze-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: none;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-item:nth-child(2) {
+        border-right: none;
+      }
+
+      .qe-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .value-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .about-avatar {
+        max-width: 220px;
+        margin: 0 auto;
+      }
+
+      .about-skills {
+        justify-content: center;
+      }
+
+      .deck-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+
+      .deck-visual {
+        order: -1;
+      }
+    }
+
+    /* ── Tablet (portrait + landscape) ── */
+    @media (min-width: 601px) and (max-width: 1024px) {
+      /* Global section padding reduced for tablet */
+      #hero        { padding: 100px 6% 60px; }
+      #stats       { padding: 48px 6%; }
+      #problem     { padding: 80px 6%; }
+      #platform    { padding: 80px 6%; }
+      #quote-engine { padding: 80px 6%; }
+      #packages    { padding: 80px 6%; }
+      #conversion  { padding: 80px 6%; }
+      #stages      { padding: 80px 6%; }
+      #value       { padding: 80px 6%; }
+      #about       { padding: 80px 6%; }
+      #pitch-deck  { padding: 80px 6%; }
+      #contact     { padding: 80px 6%; }
+      footer       { padding: 24px 6%; }
+
+      /* Nav */
+      nav          { padding: 18px 6%; }
+      nav.scrolled { padding: 12px 6%; }
+      .nav-links   { gap: 22px; }
+
+      /* Hero */
+      .hero-content { max-width: 700px; }
+      .hero-door-stage {
+        width: 150px;
+        height: 200px;
+        margin: 0 auto 36px;
+      }
+
+      /* Stats — keep 4-column on larger tablets, 2-col on smaller */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+      }
+      .stat-item { padding: 26px 20px; }
+      .stat-item:nth-child(2) { border-right: 1px solid rgba(184,135,75,0.1); }
+      .stat-item:nth-child(3) { border-right: none; }
+
+      /* Section headers */
+      .section-header { margin-bottom: 48px; }
+
+      /* Problems — single column on tablet portrait, 2-col on landscape */
+      .problems-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+      }
+      .problem-card { padding: 30px; }
+
+      /* Platform subsystems */
+      .subsystems-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+        margin-top: 40px;
+      }
+      .subsystem-card { padding: 36px 28px; }
+
+      /* Quote engine */
+      .qe-inner { gap: 36px; }
+
+      /* Packages */
+      .packages-header { margin-bottom: 48px; }
+      .pkg-tabs { flex-wrap: wrap; width: auto; }
+      .pkg-tab  { padding: 10px 18px; font-size: 11px; }
+      .pkg-panel { max-width: 100%; }
+      .pkg-top  { padding: 36px; }
+      .pkg-features { padding: 32px 36px; }
+      .features-cols { grid-template-columns: 1fr 1fr; gap: 0 24px; }
+
+      /* Conversion */
+      .conversion-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 40px;
+      }
+      .conversion-card { padding: 30px; }
+
+      /* Stages */
+      .stages-inner { max-width: 100%; }
+      .stage-item { grid-template-columns: 64px 1fr; gap: 24px; padding: 32px 0; }
+
+      /* Value */
+      .value-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 40px;
+      }
+      .value-card { padding: 32px; }
+
+      /* About */
+      .about-inner {
+        grid-template-columns: 200px 1fr;
+        text-align: left;
+        gap: 40px;
+      }
+      .about-avatar { max-width: 200px; margin: 0; }
+      .about-skills { justify-content: flex-start; }
+
+      /* Pitch deck */
+      .deck-inner { gap: 40px; }
+      .deck-preview { width: 240px; height: 320px; }
+
+      /* Contact */
+      .contact-card { padding: 36px; }
+
+      /* Quote banner */
+      .quote-banner { padding: 32px; }
+    }
+
+    /* Narrow tablet / large phone portrait (601px–768px) */
+    @media (min-width: 601px) and (max-width: 768px) {
+      .problems-grid    { grid-template-columns: 1fr; }
+      .subsystems-grid  { grid-template-columns: 1fr; }
+      .conversion-grid  { grid-template-columns: 1fr; }
+      .value-grid       { grid-template-columns: 1fr; }
+      .about-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .about-avatar { max-width: 180px; margin: 0 auto; }
+      .about-skills { justify-content: center; }
+      .deck-inner { grid-template-columns: 1fr; text-align: center; }
+      .deck-visual { order: -1; }
+    }
+
+    @media (max-width: 768px) {
+      .problems-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .subsystems-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .conversion-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pkg-top {
+        grid-template-columns: 1fr;
+      }
+
+      .pkg-price-block {
+        text-align: left;
+      }
+
+      .features-cols {
+        grid-template-columns: 1fr;
+      }
+
+      .pkg-tabs {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+
+      .stage-item {
+        grid-template-columns: 60px 1fr;
+        gap: 20px;
+      }
+
+      .pkg-top {
+        padding: 32px;
+      }
+
+      .pkg-features {
+        padding: 28px 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(184, 135, 75, 0.1);
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .reveal,
+      .reveal-left,
+      .reveal-right {
+        opacity: 1;
+        transform: none;
+      }
+
+      .hero-door-leaf {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-door" id="loaderDoor"></div>
+    <div class="loader-logo" id="loaderLogo">Luxurysecuritydoors</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <div class="loader-text" id="loaderText">A Digital Storefront for Luxury Security Doors</div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Threshold</a>
+    <ul class="nav-links">
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#conversion">Why It Converts</a></li>
+      <li><a href="#stages">Process</a></li>
+      <li><a href="#pitch-deck">Pitch Deck</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a
+          href="https://wa.me/2349039977439?text=Hello%20Justdavidtech%2C%20I%27m%20interested%20in%20the%20Threshold%20platform%20for%20Luxury%20Security%20Doors."
+          class="nav-cta" target="_blank" rel="noopener">Get Started</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#problem" onclick="closeMobile()">The Problem</a>
+    <a href="#packages" onclick="closeMobile()">Packages</a>
+    <a href="#conversion" onclick="closeMobile()">Why It Converts</a>
+    <a href="#stages" onclick="closeMobile()">Process</a>
+    <a href="#pitch-deck" onclick="closeMobile()">Pitch Deck</a>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="https://wa.me/2349039977439?text=Hello%20Justdavidtech%2C%20I%27m%20interested%20in%20the%20Threshold%20platform%20for%20Luxury%20Security%20Doors."
+      target="_blank" rel="noopener" style="color:var(--bronze-light)" onclick="closeMobile()">Get Started</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grooves"></div>
+    <div class="hero-content">
+      <div class="hero-badge">A Digital Storefront, Built Like a Door</div>
+
+      <div class="hero-door-stage">
+        <div class="hero-door-glow" id="doorGlow"></div>
+        <div class="hero-door-frame"></div>
+        <div class="hero-door-leaf" id="doorLeaf">
+          <div class="hero-door-handle"></div>
+        </div>
+      </div>
+
+      <h1 class="hero-title">
+        Every Visitor Should<br />
+        <span class="bronze">Walk Through</span>, Not<br />
+        <span class="outline">Turn Away</span>
+      </h1>
+      <p class="hero-sub">
+        Threshold is a complete digital storefront for Luxury Security Doors: a premium public
+        site, a structured product catalog, an instant quote engine, and an admin command center,
+        unified in one platform.
+      </p>
+      <div class="hero-actions">
+        <a href="#packages" class="btn-primary">View Packages ↓</a>
+        <a href="#pitch-deck" class="btn-secondary" target="_blank" rel="noopener">Download PDF</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number" data-target="6">0</div>
+        <div class="stat-label">Package Tiers</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.1s">
+        <div class="stat-number" data-target="10">0</div>
+        <div class="stat-label">Door Categories</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.2s">
+        <div class="stat-number" data-target="6">0</div>
+        <div class="stat-label">Delivery Stages</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.3s">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Bespoke Build</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="problem-glow"></div>
+    <div class="section-header reveal">
+      <span class="eyebrow">The Problem</span>
+      <span class="bronze-line"></span>
+      <h2 class="section-title">The Current Site Shows<br />Doors. It Doesn't Sell Them.</h2>
+      <p class="section-body">A photo gallery on a WordPress theme can showcase craftsmanship, but it can't close a
+        sale the way a structured storefront can.</p>
+    </div>
+    <div class="problems-grid">
+      <div class="problem-card reveal">
+        <span class="problem-num">ISSUE 01</span>
+        <div class="problem-title">No Instant Pricing</div>
+        <p class="problem-text">Buyers can't gauge whether a door fits their budget without messaging in first. Most
+          simply leave before ever making contact.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.1s">
+        <span class="problem-num">ISSUE 02</span>
+        <div class="problem-title">Unstructured Catalog</span></div>
+        <p class="problem-text">A photo grid isn't a shopping experience. There's no way to filter by material, size,
+          or use case, so browsing feels like scrolling, not choosing.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.15s">
+        <span class="problem-num">ISSUE 03</span>
+        <div class="problem-title">Manual Restocking</div>
+        <p class="problem-text">Every new door design, price change, or sold-out item currently requires a developer
+          to update the site, slowing the business down.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.2s">
+        <span class="problem-num">ISSUE 04</span>
+        <div class="problem-title">Slow, Unoptimized Pages</div>
+        <p class="problem-text">Heavy, uncompressed product images hurt both search ranking and mobile load times,
+          right where most buyers in this market are browsing.</p>
+      </div>
+    </div>
+    <div class="quote-banner reveal">
+      <p class="quote-text">"Every visitor who leaves without a price never becomes a customer."</p>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section id="platform">
+    <div class="platform-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">The Solution</span>
+        <span class="bronze-line"></span>
+        <h2 class="section-title">Four Integrated Subsystems.<br />One Unified Platform.</h2>
+        <p class="section-body">Every component is engineered to work in absolute synchronicity, from the public
+          storefront to daily catalog management.</p>
+      </div>
+      <div class="subsystems-grid">
+        <div class="subsystem-card reveal">
+          <span class="subsystem-letter">A</span>
+          <span class="subsystem-tag">Subsystem A</span>
+          <div class="subsystem-title">High-Fidelity Storefront</div>
+          <p class="subsystem-text">A premium, animated public website that communicates craftsmanship and drives
+            client acquisition, with bespoke motion, interactive modals, and full mobile responsiveness.</p>
+        </div>
+        <div class="subsystem-card reveal" style="transition-delay:0.1s">
+          <span class="subsystem-letter">B</span>
+          <span class="subsystem-tag">Subsystem B</span>
+          <div class="subsystem-title">Structured Catalog Engine</div>
+          <p class="subsystem-text">A filterable product catalog with individual pages per door, organized by
+            material, size, and use case, so browsing turns into shopping.</p>
+        </div>
+        <div class="subsystem-card reveal" style="transition-delay:0.15s">
+          <span class="subsystem-letter">C</span>
+          <span class="subsystem-tag">Subsystem C</span>
+          <div class="subsystem-title">Instant Quote Engine</div>
+          <p class="subsystem-text">A real-time calculator that turns door type, size, material, and finish into a
+            price range, then hands the lead straight to WhatsApp.</p>
+        </div>
+        <div class="subsystem-card reveal" style="transition-delay:0.2s">
+          <span class="subsystem-letter">D</span>
+          <span class="subsystem-tag">Subsystem D</span>
+          <div class="subsystem-title">Admin Command Center</div>
+          <p class="subsystem-text">A private dashboard where staff manage products, prices, and stock status, and
+            track every quote request from submission to sale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE ENGINE DETAIL -->
+  <section id="quote-engine">
+    <div class="qe-inner">
+      <div class="reveal-left">
+        <span class="eyebrow">Instant Quote Engine</span>
+        <span class="bronze-line left"></span>
+        <h2 class="section-title" style="text-align:left">A Price Before<br />A Phone Call.</h2>
+        <p class="section-body" style="text-align:left;max-width:100%;margin:0 0 32px">Visitors select a door type,
+          material, size, and finish, and get a real, live estimate in seconds. No account. No waiting on a reply.
+          Just enough information to decide whether to reach out.</p>
+        <ul class="qe-features-list">
+          <li>Real-time price range generated from the live catalog, not a guess</li>
+          <li>"Get Exact Quote on WhatsApp" auto-fills the visitor's selections</li>
+          <li>Optional photo upload of the existing doorway for a sharper estimate</li>
+          <li>Every quote request logged and tagged, never lost in a chat inbox</li>
+          <li>Financing/installment messaging shown where it applies</li>
+          <li>Admin can adjust base pricing at any time, no redeploy required</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <div class="qe-visual">
+          <div class="qe-screen">
+            <div class="qe-header-bar">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+              <div class="qe-url">luxurysecuritydoors.com/quote</div>
+            </div>
+            <div class="qe-body">
+              <div class="qe-title">Get an Instant Estimate</div>
+              <div class="qe-field"><span>Door Type</span><span>Israeli Steel Security</span></div>
+              <div class="qe-field"><span>Size</span><span>4ft Single</span></div>
+              <div class="qe-field"><span>Finish</span><span>Royal Embossed</span></div>
+              <div class="qe-result">
+                <div class="qe-result-label">Estimated Price Range</div>
+                <div class="qe-result-price">₦850,000 – ₦1,150,000</div>
+              </div>
+              <button class="qe-btn">Get Exact Quote on WhatsApp</button>
+            </div>
+          </div>
+          <div class="qe-log">
+            <div class="ok">[10:02:11] QUOTE GENERATED · Israeli Steel · 4ft</div>
+            <div class="warn">[10:02:12] LEAD CAPTURED · ref QT-2026-0118</div>
+            <div class="ok">[10:02:19] WHATSAPP HANDOFF · initiated</div>
+            <div>[10:04:03] ADMIN NOTIFIED · new quote pending follow-up</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section id="packages">
+    <div class="packages-header reveal">
+      <span class="eyebrow">Pricing</span>
+      <span class="bronze-line"></span>
+      <h2 class="section-title">Six Packages.<br />One Perfect Fit.</h2>
+      <p class="section-body">Every package is fully self-contained. Choose what the business needs today and upgrade
+        at any time. <em>(Figures below are starting points for discussion, not final quotes.)</em></p>
+    </div>
+
+    <div class="pkg-tabs" role="tablist">
+      <button class="pkg-tab active" onclick="showPkg('starter')" role="tab">Starter</button>
+      <button class="pkg-tab" onclick="showPkg('standard')" role="tab">Standard</button>
+      <button class="pkg-tab" onclick="showPkg('premium')" role="tab">Premium</button>
+      <button class="pkg-tab" onclick="showPkg('gold')" role="tab">Gold</button>
+      <button class="pkg-tab" onclick="showPkg('platinum')" role="tab">Platinum</button>
+      <button class="pkg-tab" onclick="showPkg('diamond')" role="tab">💎 Diamond</button>
+    </div>
+
+    <!-- STARTER -->
+    <div class="pkg-panel active" id="pkg-starter">
+      <div class="pkg-card">
+        <div class="pkg-top">
+          <div>
+            <span class="pkg-emoji">🟥</span>
+            <div class="pkg-name">Starter</div>
+            <p class="pkg-tagline">Professional Storefront Foundation. A clean, credible public presence built to
+              replace the current WordPress theme.</p>
+          </div>
+          <div class="pkg-price-block">
+            <span class="pkg-price">₦350k</span>
+            <span class="pkg-price-label">One-time development fee</span>
+            <div class="pkg-maint">₦40,000 <span>/ month maintenance</span></div>
+          </div>
+        </div>
+        <div class="pkg-features">
+          <span class="pkg-features-title">Everything Included</span>
+          <div class="features-cols">
+            <div class="feature-item"><div class="feature-check">✓</div>Home page with hero imagery of flagship
+              designs</div>
+            <div class="feature-item"><div class="feature-check">✓</div>About page: company story, years in
+              business, founder profile</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Categories overview page (Security, Wooden,
+              Sliding, Glass, Metal, Commercial, etc.)</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Contact page with inquiry form</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Static image gallery, organized by category
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>Embedded map + real service area listing
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>Dark footer with full contact details and
+              real social links</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Brand color palette and typography applied
+              site-wide</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Fully mobile-responsive layout</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Free SSL Certificate setup</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Full deployment to client hosting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STANDARD -->
+    <div class="pkg-panel" id="pkg-standard">
+      <div class="pkg-card">
+        <div class="pkg-top">
+          <div>
+            <span class="pkg-emoji">🟨</span>
+            <div class="pkg-name">Standard</div>
+            <p class="pkg-tagline">High-Fidelity Interactive Experience. Every section breathes with motion and every
+              interaction signals quality.</p>
+          </div>
+          <div class="pkg-price-block">
+            <span class="pkg-price">₦550k</span>
+            <span class="pkg-price-label">One-time development fee</span>
+            <div class="pkg-maint">₦60,000 <span>/ month maintenance</span></div>
+          </div>
+        </div>
+        <div class="pkg-features">
+          <span class="pkg-features-title">Everything Included</span>
+          <div class="features-cols">
+            <div class="feature-item"><div class="feature-check">✓</div>All pages from Starter Package</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Geometric pre-loading animation</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Floating glassmorphism navbar with scroll
+              animations</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Scroll-triggered fade-in and slide reveal
+              animations</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Hover micro-interactions on product cards
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>"Book a Consultation" scheduling modal</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Category slider / showcase modal on homepage
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>Real Google Reviews integration</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Trust signal counters (years in business,
+              doors installed, projects completed)</div>
+            <div class="feature-item"><div class="feature-check">✓</div>WhatsApp and telephone floating buttons
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>SSL and full deployment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="pkg-panel" id="pkg-premium">
+      <div class="pkg-card">
+        <div class="pkg-top">
+          <div>
+            <span class="pkg-emoji">🟦</span>
+            <div class="pkg-name">Premium</div>
+            <p class="pkg-tagline">Structured Product Catalog Engine. Browsing becomes shopping, and every image
+              finally loads fast.</p>
+          </div>
+          <div class="pkg-price-block">
+            <span class="pkg-price">₦850k</span>
+            <span class="pkg-price-label">One-time development fee</span>
+            <div class="pkg-maint">₦80,000 <span>/ month maintenance</span></div>
+          </div>
+        </div>
+        <div class="pkg-features">
+          <span class="pkg-features-title">Everything Included</span>
+          <div class="features-cols">
+            <div class="feature-item"><div class="feature-check">✓</div>All features from Standard Package</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Full filterable product catalog (material,
+              size, door type, use case)</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Individual product pages: specs, images,
+              price range, related doors</div>
+            <div class="feature-item"><div class="feature-check">✓</div>CMS-driven catalog structure, ready to scale
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>Before/After &amp; "Installed On-Site"
+              project gallery</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Automated image compression and optimisation
+              pipeline</div>
+            <div class="feature-item"><div class="feature-check">✓</div>SEO metadata automation per product page
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>Social sharing on product/project pages
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>SSL, CMS setup, and full deployment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOLD -->
+    <div class="pkg-panel" id="pkg-gold">
+      <div class="pkg-card">
+        <div class="pkg-top">
+          <div>
+            <span class="pkg-emoji">🟪</span>
+            <div class="pkg-name">Gold</div>
+            <p class="pkg-tagline">Instant Quote Engine. Visitors get a real price range before they ever pick up the
+              phone.</p>
+          </div>
+          <div class="pkg-price-block">
+            <span class="pkg-price">₦1.1M</span>
+            <span class="pkg-price-label">One-time development fee</span>
+            <div class="pkg-maint">₦100,000 <span>/ month maintenance</span></div>
+          </div>
+        </div>
+        <div class="pkg-features">
+          <span class="pkg-features-title">Everything Included</span>
+          <div class="features-cols">
+            <div class="feature-item"><div class="feature-check">✓</div>All features from Premium Package</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Instant Quote Calculator (type, material,
+              size, finish → price range)</div>
+            <div class="feature-item"><div class="feature-check">✓</div>"Get Exact Quote on WhatsApp" with
+              auto-filled selections</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Financing / installment plan messaging on
+              relevant products</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Lead capture form with doorway photo upload
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>Quote request logging for structured
+              follow-up</div>
+            <div class="feature-item"><div class="feature-check">✓</div>SSL, quote engine setup, and full deployment
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLATINUM -->
+    <div class="pkg-panel" id="pkg-platinum">
+      <div class="pkg-card">
+        <div class="pkg-top">
+          <div>
+            <span class="pkg-emoji">⬛</span>
+            <div class="pkg-name">Platinum</div>
+            <p class="pkg-tagline">Admin Command Center. Full control over catalog, pricing, and leads, without a
+              developer on speed dial.</p>
+          </div>
+          <div class="pkg-price-block">
+            <span class="pkg-price">₦1.4M</span>
+            <span class="pkg-price-label">One-time development fee</span>
+            <div class="pkg-maint">₦130,000 <span>/ month maintenance</span></div>
+          </div>
+        </div>
+        <div class="pkg-features">
+          <span class="pkg-features-title">Everything Included</span>
+          <div class="features-cols">
+            <div class="feature-item"><div class="feature-check">✓</div>All features from Gold Package</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Full administrative dashboard, JWT-protected
+              login</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Add, edit, and delete door products
+              without a developer</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Drag-and-drop image uploader with
+              auto-compression</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Price and In Stock / Sold Out status toggle
+              per product</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Lead and quote manager: track every
+              inquiry to close</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Analytics panel: top products, quote
+              volume, traffic sources</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Real-time activity log</div>
+            <div class="feature-item"><div class="feature-check">✓</div>XSS/injection prevention, CORS lockdown
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>Full deployment with all systems live
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAMOND -->
+    <div class="pkg-panel" id="pkg-diamond">
+      <div class="pkg-card" style="border-color:rgba(184,135,75,0.4)">
+        <div class="pkg-top" style="background:linear-gradient(135deg,rgba(184,135,75,0.08),rgba(184,135,75,0.02))">
+          <div>
+            <span class="pkg-emoji">💎</span>
+            <div class="pkg-name"
+              style="background:linear-gradient(90deg,var(--bronze-light),var(--bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+              Diamond</div>
+            <p class="pkg-tagline">Full Brand Identity Suite. From the website to the business card, every touchpoint
+              is elevated.</p>
+          </div>
+          <div class="pkg-price-block">
+            <span class="pkg-price" style="font-size:34px">₦1.7M</span>
+            <span class="pkg-price-label">One-time development fee</span>
+            <div class="pkg-maint" style="border-color:rgba(184,135,75,0.4)">₦150,000 <span>/ month
+                maintenance</span></div>
+          </div>
+        </div>
+        <div class="pkg-features">
+          <span class="pkg-features-title">Everything Included</span>
+          <div class="features-cols">
+            <div class="feature-item"><div class="feature-check">✓</div>All features from Platinum Package</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Professional logo redesign/refinement</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Business card design with QR code linking
+              to the site</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Company flier in two layout variants</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Corporate letterhead for invoices and
+              correspondence</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Downloadable product catalog PDF, generated
+              from live catalog data</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Brand color palette and typography guide
+            </div>
+            <div class="feature-item"><div class="feature-check">✓</div>All assets in print-ready and digital
+              formats</div>
+            <div class="feature-item"><div class="feature-check">✓</div>Full system deployment and brand handover
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVERSION -->
+  <section id="conversion">
+    <div class="section-header reveal">
+      <span class="eyebrow">Why It Converts</span>
+      <span class="bronze-line"></span>
+      <h2 class="section-title">Built To Sell.<br />Not Just Impress.</h2>
+      <p class="section-body">Every layer of Threshold is engineered around one question: does this get a visitor
+        closer to a WhatsApp message, or further away?</p>
+    </div>
+    <div class="conversion-grid">
+      <div class="conversion-card reveal">
+        <span class="conversion-icon">💬</span>
+        <div class="conversion-title">Instant WhatsApp Handoff</div>
+        <p class="conversion-text">Every product, quote result, and call-to-action funnels to WhatsApp with a
+          pre-written message, matching how doors actually get sold in this market.</p>
+        <ul class="conversion-items">
+          <li>Pre-filled messages carry the visitor's exact selections</li>
+          <li>No dead ends: every page has a next step</li>
+        </ul>
+      </div>
+      <div class="conversion-card reveal" style="transition-delay:0.1s">
+        <span class="conversion-icon">📋</span>
+        <div class="conversion-title">Structured Lead Capture</div>
+        <p class="conversion-text">Quote requests are logged, not lost in a chat thread. Staff can see who asked for
+          what, and when, and follow up before the lead goes cold.</p>
+        <ul class="conversion-items">
+          <li>Doorway photo upload for sharper, faster quotes</li>
+          <li>Every request tagged with product and price range</li>
+        </ul>
+      </div>
+      <div class="conversion-card reveal" style="transition-delay:0.15s">
+        <span class="conversion-icon">⚡</span>
+        <div class="conversion-title">Speed and Search Visibility</div>
+        <p class="conversion-text">Compressed, optimized images and clean metadata mean faster mobile load times and
+          stronger placement in search results, both directly tied to sales.</p>
+        <ul class="conversion-items">
+          <li>Automated SEO tags on every product page</li>
+          <li>Built for mobile-first browsing, not desktop first</li>
+        </ul>
+      </div>
+      <div class="conversion-card reveal" style="transition-delay:0.2s">
+        <span class="conversion-icon">🛡</span>
+        <div class="conversion-title">Verified Trust Signals</div>
+        <p class="conversion-text">Real Google Reviews, project counters, and on-site installation photos replace
+          generic stock testimonials, so trust is earned before the first call.</p>
+        <ul class="conversion-items">
+          <li>Live review integration, not static quotes</li>
+          <li>Real project gallery, organized by installation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGES -->
+  <section id="stages">
+    <div class="section-header reveal">
+      <span class="eyebrow">Our Process</span>
+      <span class="bronze-line"></span>
+      <h2 class="section-title">Structured Delivery.<br />Zero Surprises.</h2>
+      <p class="section-body">Every project is delivered in clear, sequential stages, with review and approval at
+        each milestone before we proceed.</p>
+    </div>
+    <div class="stages-inner">
+      <div class="stage-item reveal">
+        <div class="stage-num-wrap">
+          <span class="stage-num">STAGE<br />01</span>
+          <div class="stage-dot"></div>
+        </div>
+        <div>
+          <div class="stage-title">Architecture and Theme Setup</div>
+          <p class="stage-text">Core styling, responsive layout grids, brand color system, typography integration,
+            and loading animations. The visual identity is engineered into every component from the ground up.</p>
+        </div>
+      </div>
+      <div class="stage-item reveal">
+        <div class="stage-num-wrap">
+          <span class="stage-num">STAGE<br />02</span>
+          <div class="stage-dot"></div>
+        </div>
+        <div>
+          <div class="stage-title">Catalog Data Modeling</div>
+          <p class="stage-text">Product schema, categories, image pipeline, and pricing structure for every door
+            type. Applicable to Premium and above.</p>
+        </div>
+      </div>
+      <div class="stage-item reveal">
+        <div class="stage-num-wrap">
+          <span class="stage-num">STAGE<br />03</span>
+          <div class="stage-dot"></div>
+        </div>
+        <div>
+          <div class="stage-title">Quote Engine and Lead Capture Build</div>
+          <p class="stage-text">Calculator logic, price ranges per category, WhatsApp handoff, and photo-upload lead
+            capture. Applicable to Gold and above.</p>
+        </div>
+      </div>
+      <div class="stage-item reveal">
+        <div class="stage-num-wrap">
+          <span class="stage-num">STAGE<br />04</span>
+          <div class="stage-dot"></div>
+        </div>
+        <div>
+          <div class="stage-title">Admin Dashboard and Catalog Manager</div>
+          <p class="stage-text">Full administrative dashboard, product uploader, pricing and stock controls, and the
+            lead/quote manager. Applicable to Platinum and Diamond.</p>
+        </div>
+      </div>
+      <div class="stage-item reveal">
+        <div class="stage-num-wrap">
+          <span class="stage-num">STAGE<br />05</span>
+          <div class="stage-dot"></div>
+        </div>
+        <div>
+          <div class="stage-title">Brand Identity Suite</div>
+          <p class="stage-text">Logo, business card with QR code, flier designs, letterhead, and catalog PDF. All
+            assets delivered in print-ready and digital formats. Diamond package only.</p>
+        </div>
+      </div>
+      <div class="stage-item reveal">
+        <div class="stage-num-wrap">
+          <span class="stage-num">STAGE<br />06</span>
+        </div>
+        <div>
+          <div class="stage-title">Final Auditing and Deployment</div>
+          <p class="stage-text">Cross-browser and mobile responsiveness testing, speed audit, and full deployment to
+            hosting infrastructure with SSL configuration and system handover.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section id="value">
+    <div class="section-header reveal">
+      <span class="eyebrow">Why Threshold</span>
+      <span class="bronze-line"></span>
+      <h2 class="section-title">The Returns Are<br />Immediate and Lasting.</h2>
+    </div>
+    <div class="value-grid">
+      <div class="value-card reveal">
+        <div class="value-title">Competitive Differentiation</div>
+        <p class="value-text">Positions the business as the premium option in a crowded, mostly generic market.
+          Buyers notice before the first message.</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.1s">
+        <div class="value-title">Faster Buyer Decisions</div>
+        <p class="value-text">The quote calculator answers the "can I afford this" question instantly, instead of
+          losing the visitor to a contact form.</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.15s">
+        <div class="value-title">Reduced Admin Time</div>
+        <p class="value-text">Staff manage products, prices, and stock themselves. No more calling a developer for
+          every catalog update.</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.2s">
+        <div class="value-title">Higher Quality Leads</div>
+        <p class="value-text">Every quote request arrives pre-qualified with a product, size, and price range
+          attached, not a vague "I'm interested."</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.25s">
+        <div class="value-title">Stronger Search Visibility</div>
+        <p class="value-text">Compressed images and automated SEO metadata improve ranking for the exact searches
+          buyers are already making.</p>
+      </div>
+      <div class="value-card reveal" style="transition-delay:0.3s">
+        <div class="value-title">Scalable Inventory</div>
+        <p class="value-text">Built on cloud-hosted infrastructure. As the catalog grows, the system scales without
+          new hardware or rewrites.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT DEVELOPER -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-avatar reveal-left">
+        <img src="/me-color.jpg" alt="About Developer">
+      </div>
+      <div class="reveal-right">
+        <span class="about-role">The Architect Behind Threshold</span>
+        <h2 class="about-name">Hi, I'm David, founder of Justdavidtech.</h2>
+        <p class="about-text">
+          I design and build complete digital systems for product-led businesses, not just websites,
+          but full operational infrastructure. Every project I take on is treated as a long-term
+          partnership: I build it, deploy it, and stay on to maintain and grow it alongside the
+          business.
+        </p>
+        <p class="about-text">
+          Threshold is the product of real engineering work: structured product catalogs, real-time
+          quote engines, administrative dashboards, and high-fidelity interfaces, all built from the
+          ground up and proven in production. When you work with Justdavidtech, you are working
+          directly with the person who builds, secures, and supports the system.
+        </p>
+        <div class="about-skills">
+          <span class="about-skill">React &amp; Node.js</span>
+          <span class="about-skill">Catalog &amp; Quote Systems</span>
+          <span class="about-skill">Cloud Deployment</span>
+          <span class="about-skill">UI / UX Design</span>
+          <span class="about-skill">Brand Identity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PITCH DECK CTA -->
+  <section id="pitch-deck">
+    <div class="deck-inner">
+      <div class="reveal-left">
+        <span class="eyebrow">Executive Summary</span>
+        <span class="bronze-line left" style="margin: 0 0 20px;"></span>
+        <h2 class="section-title" style="text-align:left;">Download the Complete<br />Threshold Pitch Deck</h2>
+        <p class="section-body" style="text-align:left; max-width:100%; margin:0 0 32px;">
+          Get a comprehensive, offline PDF version of the Threshold platform proposal. Inside, you'll
+          find the full architecture, the conversion strategy, granular package comparisons, delivery
+          timelines, and post-deployment maintenance terms.
+        </p>
+        <a href="LSD_Pitch.pdf" class="btn-primary" download="LSD_Pitch.pdf">
+          <svg class="deck-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Proposal PDF
+        </a>
+      </div>
+      <div class="deck-visual reveal-right">
+        <div class="deck-card-glow"></div>
+        <div class="deck-preview">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="deck-preview-brand">Pitch Deck</span>
+              <span class="deck-preview-meta">PDF Format</span>
+            </div>
+            <h3 class="deck-preview-title">Threshold:<br /><span style="color:var(--bronze-light);">Digital
+                Storefront &amp; Quote Engine</span></h3>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <span class="deck-preview-logo">Justdavidtech</span>
+            <span class="deck-preview-meta">v1.0 / 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-glow"></div>
+    <div class="contact-inner">
+      <div class="reveal">
+        <span class="eyebrow">Get Started</span>
+        <span class="bronze-line"></span>
+        <h2 class="contact-title">Ready to Turn Visitors<br />Into Customers?</h2>
+        <p class="contact-sub">We're available for a no-obligation consultation to walk through every component and
+          answer every question.</p>
+      </div>
+      <div class="contact-card reveal">
+        <ul class="contact-rows">
+          <li class="contact-row">
+            <span class="contact-label">Company</span>
+            <span class="contact-value">Justdavidtech</span>
+          </li>
+          <li class="contact-row">
+            <span class="contact-label">Email</span>
+            <span class="contact-value"><a href="mailto:justdavidtech@gmail.com">justdavidtech@gmail.com</a></span>
+          </li>
+          <li class="contact-row">
+            <span class="contact-label">Phone</span>
+            <span class="contact-value"><a href="tel:+2349039977439">+234 903 997 7439</a></span>
+          </li>
+          <li class="contact-row">
+            <span class="contact-label">Website</span>
+            <span class="contact-value"><a href="https://justdavidtech.com" target="_blank">justdavidtech.com</a></span>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <a href="https://wa.me/2349039977439?text=Hello%20Justdavidtech%2C%20I%27d%20like%20to%20get%20started%20with%20Threshold%20for%20Luxury%20Security%20Doors."
+          class="btn-primary" target="_blank" rel="noopener">Send Us a Message on WhatsApp →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING ACTION BUTTONS -->
+  <div class="fab-stack">
+    <button class="fab fab-top" id="fabTop" aria-label="Scroll to top">↑</button>
+    <a href="https://wa.me/2349039977439?text=Hello%20Justdavidtech%2C%20I%27m%20interested%20in%20the%20Threshold%20platform%20for%20Luxury%20Security%20Doors."
+      class="fab fab-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" style="position:relative;z-index:1">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.745-.872-2.888-1.555-4.036-3.527-.305-.524.305-.487.873-1.624.097-.198.05-.371-.05-.52-.099-.149-.669-1.612-.916-2.207-.247-.594-.5-.514-.67-.524-.173-.01-.371-.012-.57-.012-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.05 3.133 4.974 4.273 2.923 1.14 2.923.76 3.41.711.487-.05 1.578-.643 1.8-1.264.224-.62.224-1.165.149-1.264-.073-.099-.272-.149-.57-.297z" />
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.137.555 4.146 1.527 5.882L0 24l6.293-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.96c-1.969 0-3.91-.532-5.59-1.537l-.401-.238-4.146.987.974-4.06-.262-.418A9.945 9.945 0 012.04 12C2.04 6.5 6.5 2.04 12 2.04S21.96 6.5 21.96 12 17.5 21.96 12 21.96z" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Threshold</div>
+    <div class="footer-text">A Digital Storefront for Luxury Security Doors</div>
+    <div class="footer-tag">Justdavidtech © 2026</div>
+  </footer>
+
+  <script>
+    // ── Loader ────────────────────────────────────────────────────────────────
+    window.addEventListener('load', () => {
+      const logo = document.getElementById('loaderLogo');
+      const bar = document.getElementById('loaderBar');
+      const text = document.getElementById('loaderText');
+      const loader = document.getElementById('loader');
+      const loaderDoor = document.getElementById('loaderDoor');
+
+      setTimeout(() => { loaderDoor.style.transition = 'opacity 0.6s ease'; loaderDoor.style.opacity = '1'; }, 50);
+      setTimeout(() => { logo.style.transition = 'opacity 0.6s ease'; logo.style.opacity = '1'; }, 150);
+      setTimeout(() => { bar.style.width = '100%'; }, 350);
+      setTimeout(() => { text.style.transition = 'opacity 0.6s ease'; text.style.opacity = '1'; }, 650);
+      setTimeout(() => {
+        loader.style.transition = 'opacity 0.8s ease';
+        loader.style.opacity = '0';
+        setTimeout(() => { loader.style.display = 'none'; }, 800);
+      }, 1800);
+
+      // Signature hero moment: the door swings open once the loader clears
+      setTimeout(() => {
+        document.getElementById('doorLeaf').classList.add('open');
+        document.getElementById('doorGlow').classList.add('lit');
+      }, 1900);
+    });
+
+    // ── Navbar ────────────────────────────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      const fabTop = document.getElementById('fabTop');
+      fabTop.classList.toggle('show', window.scrollY > 500);
+    });
+
+    // ── Mobile menu ───────────────────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    // ── Scroll to top ─────────────────────────────────────────────────────────
+    document.getElementById('fabTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── Package tabs ──────────────────────────────────────────────────────────
+    function showPkg(id) {
+      document.querySelectorAll('.pkg-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.pkg-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('pkg-' + id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // ── Scroll reveal ─────────────────────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Counter animation ─────────────────────────────────────────────────────
+    const counters = document.querySelectorAll('[data-target]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          let current = 0;
+          const step = target / 40;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              el.textContent = target + '+';
+              clearInterval(timer);
+            } else {
+              el.textContent = Math.floor(current);
+            }
+          }, 40);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+
+    // ── Quote engine log animation ────────────────────────────────────────────
+    const qeLog = document.querySelector('.qe-log');
+    if (qeLog) {
+      const logObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          const lines = qeLog.querySelectorAll('div');
+          lines.forEach((line, i) => {
+            line.style.opacity = '0';
+            setTimeout(() => {
+              line.style.transition = 'opacity 0.4s';
+              line.style.opacity = '1';
+            }, i * 600);
+          });
+          logObs.disconnect();
+        }
+      }, { threshold: 0.5 });
+      logObs.observe(qeLog);
+    }
+  </script>
+</body>
+</html>
